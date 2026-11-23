@@ -144,9 +144,9 @@ section{position:relative;scroll-margin-top:56px}
 @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
 .wall-label{position:absolute;background:var(--card);border:1px solid var(--line);padding:8px 12px;font-size:12px;line-height:1.5;box-shadow:0 10px 24px rgb(0 0 0/.08);white-space:nowrap}
 .wall-label b{display:block;font-family:var(--f-num);font-size:18px;font-weight:700;color:var(--accent)}
-.wall-label.a{left:-6%;top:14%}
-.wall-label.b{right:-8%;top:44%}
-.wall-label.c{left:2%;bottom:6%}
+.wall-label.a{left:-12%;top:-1%}
+.wall-label.b{right:-14%;top:62%}
+.wall-label.c{left:-10%;bottom:-2%}
 .par{position:absolute;border-radius:50%;pointer-events:none;z-index:1;transition:transform .25s ease-out}
 .par.p1{width:80px;height:80px;left:6%;top:20%;background:var(--mirror);opacity:.55}
 .par.p2{width:150px;height:150px;right:4%;bottom:6%;background:radial-gradient(circle at 30% 30%,color-mix(in srgb,var(--accent) 30%,transparent),transparent 70%)}
@@ -155,7 +155,8 @@ section{position:relative;scroll-margin-top:56px}
 @media (max-width:900px){
   .hero .wrap{grid-template-columns:1fr}
   .stage{order:-1;width:min(76vw,330px)}
-  .wall-label.a{left:-4%}.wall-label.b{right:-4%}
+  .wall-label{padding:6px 10px;font-size:11px}.wall-label b{font-size:15px}
+  .wall-label.a{left:-8%;top:52%}.wall-label.b{right:-8%;top:70%}.wall-label.c{left:-4%;bottom:-6%}
 }
 
 /* ---------- stats ---------- */
@@ -212,11 +213,12 @@ section{position:relative;scroll-margin-top:56px}
 }
 
 /* ---------- ROOM 02: works grid ---------- */
-.pf{display:grid;gap:22px;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,260px)}
+.pf{display:grid;gap:22px;grid-template-columns:repeat(3,1fr);grid-auto-rows:270px;transition:opacity .22s,transform .22s}
+.pf.out{opacity:0;transform:translateY(12px)}
 .pf-item{position:relative;overflow:hidden;border-radius:0 0 3em 0;text-decoration:none;color:#fff;min-width:0;isolation:isolate;background:#222}
-.pf-item:nth-child(1){grid-column:1/span 2;grid-row:1/span 2;border-radius:3em 0 0 0}
-.pf-item:nth-child(3),.pf-item:nth-child(5){border-radius:0 3em 0 0}
-.pf-item:nth-child(4){grid-column:3/span 2;grid-row:2/span 2}
+.pf-item.big{grid-column:span 2;grid-row:span 2;border-radius:3em 0 0 0}
+.pf-item.w2{grid-column:span 2}.pf-item.w3{grid-column:1/-1}
+.pf-item:not(.big):nth-child(even){border-radius:0 3em 0 0}
 .pf-img{position:absolute;inset:0;transition:transform .6s}
 .pf-img .glyph{position:absolute;right:4%;top:2%;font-family:var(--f-serif);font-weight:900;font-size:clamp(80px,10vw,160px);line-height:1;color:rgb(255 255 255/.12)}
 .pf-item:hover .pf-img,.pf-item:focus-visible .pf-img{transform:scale(1.08)}
@@ -225,19 +227,19 @@ section{position:relative;scroll-margin-top:56px}
 .pf-label{position:absolute;left:20px;right:20px;bottom:20px;z-index:2;display:grid;gap:6px}
 .pf-no{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;color:rgb(255 255 255/.7)}
 .pf-title{font-family:var(--f-serif);font-weight:700;font-size:clamp(18px,1.8vw,23px);line-height:1.35}
-.pf-item:nth-child(1) .pf-title,.pf-item:nth-child(4) .pf-title{font-size:clamp(22px,2.6vw,32px)}
+.pf-item.big .pf-title{font-size:clamp(22px,2.6vw,32px)}
 .pf-meta{font-size:12px;color:rgb(255 255 255/.75)}
 .pf-desc{font-size:14px;color:#e2e5ea;max-height:0;opacity:0;overflow:hidden;transition:max-height .5s,opacity .4s}
-.pf-item:hover .pf-desc,.pf-item:focus-visible .pf-desc,.pf-item:nth-child(1) .pf-desc,.pf-item:nth-child(4) .pf-desc{max-height:170px;opacity:1}
+.pf-item:hover .pf-desc,.pf-item:focus-visible .pf-desc,.pf-item.big .pf-desc,.pf-item.w2 .pf-desc,.pf-item.w3 .pf-desc{max-height:170px;opacity:1}
 .pf-kpi{position:absolute;top:18px;left:20px;z-index:2;font-family:var(--f-num);font-weight:700;font-size:15px;padding:3px 10px;background:rgb(255 255 255/.92);color:#111}
 .pf-go{position:absolute;top:16px;right:16px;z-index:2;width:38px;height:38px;border-radius:50%;border:1px solid rgb(255 255 255/.4);display:grid;place-items:center;transition:all .3s}
 .pf-go svg{width:12px;height:12px;fill:#fff;transition:transform .3s}
 .pf-item:hover .pf-go{background:#fff}
 .pf-item:hover .pf-go svg{fill:#111;transform:rotate(-45deg)}
 @media (hover:none){.pf-desc{max-height:170px;opacity:1}}
-@media (max-width:980px){.pf{grid-template-columns:1fr 1fr;grid-template-rows:none;grid-auto-rows:minmax(300px,auto)}
-  .pf-item:nth-child(1),.pf-item:nth-child(4){grid-column:span 2;grid-row:auto}}
-@media (max-width:600px){.pf{grid-template-columns:1fr}.pf-item:nth-child(1),.pf-item:nth-child(4){grid-column:auto}.pf-item{border-radius:2em 0 2em 0!important}}
+@media (max-width:980px){.pf{grid-template-columns:1fr 1fr;grid-auto-rows:minmax(300px,auto)}
+  .pf-item.big{grid-row:auto}.pf-item.w2,.pf-item.w3{grid-column:auto}.pf-item.big,.pf-item.t2{grid-column:1/-1}}
+@media (max-width:600px){.pf{grid-template-columns:1fr}.pf-item.big,.pf-item.t2,.pf-item.w2,.pf-item.w3{grid-column:auto}.pf-item{border-radius:2em 0 2em 0!important}}
 
 /* ---------- ROOM 03: pinned timeline ---------- */
 .hz{background:var(--room);color:var(--room-ink);margin-top:110px}
@@ -846,6 +848,34 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   .mr-facts div{grid-template-columns:70px 1fr}}
 @media (prefers-reduced-motion:reduce){.mr-marble,.mr-split .glass::after{animation:none}}
 
+/* 鏡裡鏡外 · mirror tricks */
+.mr-flip{display:grid;justify-items:center;padding:30px 0 80px;perspective:900px;text-align:center;user-select:none}
+.mr-flip span{font-family:var(--f-serif);font-weight:900;font-size:clamp(52px,11vw,140px);line-height:1.05;letter-spacing:.1em;margin-right:-.1em;background:linear-gradient(100deg,#7ad9c4,#f3f0e8 50%,#f2b45c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mr-flip .dn{transform-origin:50% 0;transform:rotateX(calc((1 - var(--p,0)) * 180deg));opacity:calc(.3 + var(--p,0) * .7);filter:blur(calc((1 - var(--p,0)) * 3px));will-change:transform}
+.mr-flip .up{border-bottom:1px solid rgb(255 255 255/.18);padding-bottom:6px}
+.mr-lens-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);gap:44px;align-items:center;margin-top:100px}
+.mr-lens-h h4{font-family:var(--f-serif);font-weight:900;font-size:clamp(24px,2.8vw,34px);line-height:1.45;margin-top:12px}
+.mr-lens-h p{color:#a9a8a3;font-size:14.5px;margin-top:12px}
+.mr-lens{--mx:50%;--my:50%;--r:110px;position:relative;aspect-ratio:16/9;border-radius:22px;overflow:hidden;background:#000;cursor:none;touch-action:pan-y}
+.mr-lens img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.mr-lens .seen{filter:grayscale(1) blur(7px) brightness(.55);transform:scale(1.04);-webkit-mask:radial-gradient(circle var(--r) at var(--mx) var(--my),transparent calc(var(--r) - 1px),#000 var(--r));mask:radial-gradient(circle var(--r) at var(--mx) var(--my),transparent calc(var(--r) - 1px),#000 var(--r))}
+.mr-lens .ring{position:absolute;left:var(--mx);top:var(--my);width:calc(var(--r) * 2);height:calc(var(--r) * 2);transform:translate(-50%,-50%);border-radius:50%;border:2px solid rgb(255 255 255/.85);box-shadow:0 0 0 6px rgb(122 217 196/.18),0 0 40px rgb(242 180 92/.35),inset 0 0 30px rgb(255 255 255/.15);pointer-events:none}
+.mr-lens .ring span{position:absolute;left:50%;top:100%;transform:translate(-50%,10px);font-size:12px;letter-spacing:.2em;color:#fff;white-space:nowrap;text-shadow:0 1px 6px #000}
+.mr-lens .tag{position:absolute;left:16px;top:14px;font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;color:#ddd;background:rgb(0 0 0/.45);padding:4px 10px;border-radius:99px}
+.mr-mq-h{margin-top:110px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap}
+.mr-mq-h p{color:#a9a8a3;font-size:14.5px}
+.mr-mq{margin-top:24px;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mr-mq .row{overflow:hidden}
+.mr-mq .track{display:flex;gap:12px;width:max-content;animation:mrMq 38s linear infinite}
+.mr-mq:hover .track{animation-play-state:paused}
+@keyframes mrMq{to{transform:translateX(-50%)}}
+.mr-mq .g{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:99px;border:1px solid #2f2f34;font-family:var(--f-serif);font-size:clamp(17px,2vw,22px);white-space:nowrap;background:rgb(255 255 255/.03)}
+.mr-mq .g em{font-style:normal;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;padding:2px 8px;border-radius:99px}
+.mr-mq .g.i em{background:rgb(122 217 196/.15);color:#7ad9c4}.mr-mq .g.o em{background:rgb(242 180 92/.15);color:#f2b45c}.mr-mq .g.c em{background:rgb(255 255 255/.12);color:#eee}
+.mr-mq .refl{transform:scaleY(-1);margin-top:4px;opacity:.3;-webkit-mask:linear-gradient(0deg,#000,transparent 70%);mask:linear-gradient(0deg,#000,transparent 70%);filter:blur(1px)}
+@media (max-width:900px){.mr-lens-wrap{grid-template-columns:1fr;gap:24px}.mr-lens{--r:78px}}
+@media (prefers-reduced-motion:reduce){.mr-mq .track{animation:none}.mr-flip .dn{transform:none;opacity:1;filter:none}}
+
 /* ---------- TravelLens (台灣觀光協會) ---------- */
 .tl{padding:90px 0 20px}
 .tl-k{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;color:#2f8f4e}
@@ -1009,6 +1039,112 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
 .bj-dl dt{font-family:var(--f-mono);font-size:12px;color:#8a7d70;padding-top:2px}
 .bj-dl dd{margin:0}
 @media (max-width:820px){.bj-item{grid-template-columns:1fr;gap:28px}.bj-page{max-width:380px;justify-self:center}}
+
+/* ---------- 詭憶屋 ---------- */
+.gy{background:#0b0e16;color:#e8ebf3;padding-bottom:80px}
+.sheet .sheet-panel:has(.gy){background:#0b0e16}
+.gy-hero{position:relative;aspect-ratio:16/9;max-height:72vh;width:100%;overflow:hidden;background:#000}
+.gy-hero video{width:100%;height:100%;object-fit:cover;display:block}
+.gy-hero::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(transparent,#0b0e16);pointer-events:none}
+.gy-snd{all:unset;cursor:pointer;position:absolute;right:16px;bottom:16px;z-index:2;font-size:13px;padding:7px 14px;border-radius:99px;background:rgb(255 255 255/.14);border:1px solid rgb(255 255 255/.3);backdrop-filter:blur(6px)}
+.gy-snd:focus-visible{outline:2px solid #fff}
+.gy-body{display:grid;gap:14px;max-width:880px;margin-top:-10px;position:relative}
+.gy-k{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;color:#e0545a}
+.gy h3{font-family:var(--f-serif);font-weight:900;font-size:clamp(28px,4vw,46px);line-height:1.25}
+.gy-lead{font-family:var(--f-serif);font-size:18px;color:#aeb8d0}
+.gy-body>p{color:#c3c9d6;line-height:1.95;font-size:15px}
+.gy-rules{margin-top:14px;border:1px solid #2a3350;border-radius:18px;padding:18px 20px;background:linear-gradient(160deg,#121a33,#0b0e16)}
+.gy-rh{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.gy-rh span{font-family:var(--f-serif);font-weight:900;font-size:19px}
+.gy-rh button{all:unset;cursor:pointer;font-size:13px;padding:6px 14px;border-radius:99px;background:#e0545a;color:#fff}
+.gy-rh button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.gy-rh button[disabled]{opacity:.4;cursor:default}
+.gy-rules ol{margin:0;padding:0;list-style:none;counter-reset:r;display:grid;gap:10px}
+.gy-rules li{counter-increment:r;position:relative;padding:12px 14px 12px 50px;border-radius:12px;background:rgb(255 255 255/.04);line-height:1.8;font-size:15px;transition:opacity .5s,transform .5s,filter .5s}
+.gy-rules li::before{content:counter(r);position:absolute;left:14px;top:12px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-num);font-weight:700;font-size:13px;background:#e0545a;color:#fff}
+.gy-rules li.hid{opacity:.25;filter:blur(5px);transform:translateY(6px)}
+.gy-rules b{color:#ff7b80}
+.gy-dl{margin:8px 0 0}
+.gy-dl div{display:grid;grid-template-columns:56px 1fr;gap:12px;border-top:1px solid #222a40;padding:10px 0;font-size:14px}
+.gy-dl dt{font-family:var(--f-mono);font-size:12px;color:#7f89a3;padding-top:2px}
+.gy-dl dd{margin:0}
+
+/* ---------- 元大 投資先生 ---------- */
+.yt{background:#eef3fb;color:#14223d;padding:56px 0 90px}
+.sheet .sheet-panel:has(.yt){background:#eef3fb}
+.yt-k{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;color:#1f4fa8}
+.yt h3{font-family:var(--f-serif);font-weight:900;font-size:clamp(30px,4.4vw,52px);line-height:1.25;margin-top:10px}
+.yt h3 small{display:block;font-family:var(--f-sans,inherit);font-weight:700;font-size:16px;color:#4a5a78;margin-top:8px}
+.yt-lead{max-width:44em;color:#3d4c69;font-size:15.5px;line-height:1.9;margin-top:14px}
+.yt-nums{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:30px}
+.yt-nums div{background:#fff;border-radius:16px;padding:16px 18px;display:grid;gap:2px;box-shadow:0 10px 30px -18px rgb(20 40 90/.4)}
+.yt-nums b{font-family:var(--f-num);font-size:clamp(28px,3.4vw,40px);color:#1f4fa8;line-height:1.1}
+.yt-nums span{font-size:13px;color:#4a5a78}
+.yt-flow{list-style:none;margin:34px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.yt-flow li{position:relative;display:grid;gap:6px;align-content:start;padding:18px;border-radius:16px;border:1px solid #cdd8ec;background:rgb(255 255 255/.55)}
+.yt-flow i{font-style:normal;font-family:var(--f-serif);font-weight:900;font-size:26px;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#1f4fa8;color:#fff}
+.yt-flow b{font-size:16px}
+.yt-flow span{font-size:13.5px;color:#4a5a78;line-height:1.75}
+.yt-try{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:40px;align-items:center;margin-top:56px;padding-top:44px;border-top:1px solid #cdd8ec}
+.yt-try h4,.yt-ip h4{font-family:var(--f-serif);font-weight:900;font-size:clamp(24px,3vw,34px);margin:6px 0 10px}
+.yt-tx p{color:#3d4c69;line-height:1.9;font-size:15px}
+.yt-phone{background:#fff;border-radius:30px;padding:20px 18px 22px;border:8px solid #14223d;box-shadow:0 30px 60px -30px rgb(20 40 90/.6);display:grid;gap:14px}
+.yt-ph-top{font-weight:700;font-size:15px;display:grid}
+.yt-ph-top small{font-weight:400;font-size:12px;color:#6a7894}
+.yt-unit{display:grid;grid-template-columns:1fr 1fr;background:#eef3fb;border-radius:12px;padding:4px}
+.yt-unit button,.yt-qty button{all:unset;cursor:pointer;text-align:center;box-sizing:border-box}
+.yt-unit button{padding:8px;border-radius:9px;font-size:14px;color:#4a5a78}
+.yt-unit button.on{background:#1f4fa8;color:#fff;font-weight:700}
+.yt-qty{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;border:1px solid #cdd8ec;border-radius:12px}
+.yt-qty button{height:44px;font-size:22px;color:#1f4fa8}
+.yt-unit button:focus-visible,.yt-qty button:focus-visible{outline:2px solid #1f4fa8;outline-offset:-2px}
+.yt-qty output{text-align:center;font-family:var(--f-num);font-weight:700;font-size:24px}
+.yt-calc{border-radius:12px;padding:12px 14px;background:#eef6ee;color:#1d5a2c;font-size:14px;line-height:1.7;transition:background .3s,color .3s}
+.yt-calc b{font-family:var(--f-num);font-size:20px;display:block}
+.yt-calc.warn{background:#fdecec;color:#a12a2a}
+.yt-ip{margin-top:56px;padding-top:44px;border-top:1px solid #cdd8ec}
+.yt-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.yt-cards button{all:unset;cursor:pointer;box-sizing:border-box;display:grid;justify-items:start;gap:6px;padding:18px;border-radius:18px;background:#fff;border:2px solid transparent;transition:transform .3s,border-color .3s,box-shadow .3s}
+.yt-cards button:hover{transform:translateY(-3px)}
+.yt-cards button:focus-visible{outline:2px solid var(--c);outline-offset:2px}
+.yt-cards button.on{border-color:var(--c);box-shadow:0 18px 40px -22px var(--c)}
+.yt-cards i{font-style:normal;font-family:var(--f-serif);font-weight:900;font-size:28px;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:#fff}
+.yt-cards b{font-size:16px}
+.yt-cards small{font-size:12.5px;color:#4a5a78}
+.yt-say{margin-top:16px;padding:16px 18px;border-radius:14px;background:#fff;font-size:15px;line-height:1.85;color:#3d4c69;min-height:3.5em}
+.yt-say b{color:#14223d}
+@media (max-width:900px){.yt-nums{grid-template-columns:1fr 1fr}.yt-flow{grid-template-columns:1fr 1fr}.yt-try{grid-template-columns:1fr}.yt-phone{max-width:320px;width:100%;justify-self:center;box-sizing:border-box}}
+@media (max-width:560px){.yt-flow,.yt-cards{grid-template-columns:1fr}}
+
+/* ---------- 黑客松 ---------- */
+.hk{background:#f1f5ee;color:#1d2a1f;padding:56px 0 90px}
+.sheet .sheet-panel:has(.hk){background:#f1f5ee}
+.hk-k{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;color:#3f7a3a}
+.hk h3{font-family:var(--f-serif);font-weight:900;font-size:clamp(30px,4.4vw,52px);margin-top:10px;line-height:1.25}
+.hk-lead{color:#4b5a4c;font-size:15.5px;line-height:1.9;margin-top:12px;max-width:44em}
+.hk-item{margin-top:50px;padding-top:44px;border-top:1px solid #cfdacb;display:grid;gap:12px;max-width:900px}
+.hk-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.hk-award{font-size:13px;font-weight:700;padding:4px 12px;border-radius:99px;background:#d99a1e;color:#fff}
+.hk-item h4{font-family:var(--f-serif);font-weight:900;font-size:clamp(24px,3vw,34px);line-height:1.35}
+.hk-item>p{color:#4b5a4c;line-height:1.95;font-size:15px}
+.hk-calc{margin-top:8px;background:#fff;border-radius:18px;padding:20px;display:grid;gap:12px;box-shadow:0 14px 34px -22px rgb(30 60 30/.45)}
+.hk-calc label{font-size:15px}
+.hk-calc label b{font-family:var(--f-num);font-size:20px;color:#3f7a3a}
+.hk-calc input{width:100%;accent-color:#3f7a3a}
+.hk-out{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.hk-out b{font-family:var(--f-num);font-size:clamp(36px,6vw,56px);color:#2d5e29;line-height:1}
+.hk-out span{font-size:14px;color:#4b5a4c}
+.hk-calc small{font-size:12.5px;color:#7a877b}
+.hk-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.hk-tabs button{all:unset;cursor:pointer;padding:8px 16px;border-radius:99px;border:1px solid #b9c8b4;font-size:14px;background:#fff}
+.hk-tabs button.on{background:#1d2a1f;color:#fff;border-color:#1d2a1f}
+.hk-tabs button:focus-visible{outline:2px solid #3f7a3a;outline-offset:2px}
+.hk-case{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch}
+.hk-case div{background:#fff;border-radius:16px;padding:16px 18px;display:grid;gap:6px;align-content:start;animation:pfIn .45s both}
+.hk-case div small{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;color:#7a877b}
+.hk-case div p{font-size:15px;line-height:1.8}
+.hk-case i{font-style:normal;align-self:center;font-size:22px;color:#3f7a3a}
+@media (max-width:640px){.hk-case{grid-template-columns:1fr}.hk-case i{justify-self:center;transform:rotate(90deg)}}
 
 /* ---------- 感官數位 Z 世代 (NSTC) ---------- */
 .ns{background:#0c0c0d;color:#ececea;padding:60px 0 90px}
@@ -1191,6 +1327,131 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
 .dom .dl a{position:relative;z-index:1;font-size:12px;padding:3px 10px;border-radius:99px;border:1px solid var(--c);color:var(--c);text-decoration:none;transition:background .2s,color .2s}
 .dom .dl a:hover{background:var(--c);color:#fff}
 .dom .dl a::after{content:" →"}
+.pf-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:18px 28px;margin:64px 0 10px;scroll-margin-top:90px}
+.pf-h .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;color:var(--muted)}
+.pf-h h3{font-family:var(--f-serif);font-weight:900;font-size:clamp(26px,3vw,36px);line-height:1.2;margin:4px 0 0}
+.pf-tabs{display:flex;flex-wrap:wrap;gap:8px}
+.pf-tabs button{all:unset;box-sizing:border-box;cursor:pointer;display:inline-grid;grid-template-columns:auto auto;align-items:center;column-gap:8px;padding:8px 14px 8px 16px;border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font-weight:700;font-size:15px;line-height:1.3;transition:background .25s,color .25s,border-color .25s,transform .25s}
+.pf-tabs button small{grid-column:1/-1;font-family:var(--f-mono);font-weight:400;font-size:9.5px;letter-spacing:.16em;color:var(--c);transition:color .25s}
+.pf-tabs button span{font-family:var(--f-num);font-size:12px;min-width:20px;padding:0 6px;border-radius:99px;text-align:center;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c);transition:inherit}
+.pf-tabs button:hover{border-color:var(--c);transform:translateY(-2px)}
+.pf-tabs button:focus-visible{outline:2px solid var(--c);outline-offset:2px}
+.pf-tabs button.on{background:var(--c);border-color:var(--c);color:#fff}
+.pf-tabs button.on small{color:rgb(255 255 255/.75)}
+.pf-tabs button.on span{background:rgb(255 255 255/.22);color:#fff}
+.pf-tabs button[data-k="all"].on{color:var(--bg,#fff)}
+.pf-note{margin:0 0 22px;padding-left:12px;border-left:3px solid var(--c,var(--ink));font-size:14px;color:var(--muted);transition:border-color .3s}
+.pf-cats{display:flex;flex-wrap:wrap;gap:6px}
+.pf-cats i{font-style:normal;font-size:11px;font-weight:700;letter-spacing:.04em;padding:2px 9px 2px 8px;border-radius:99px;background:rgb(0 0 0/.35);border:1px solid color-mix(in srgb,var(--c) 70%,#fff);color:#fff;backdrop-filter:blur(4px)}
+.pf-cats i::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:color-mix(in srgb,var(--c) 75%,#fff);margin-right:6px;vertical-align:1px}
+.pf-item.pf-in{animation:pfIn .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0ms)}
+@keyframes pfIn{from{opacity:0;transform:translateY(24px) scale(.97)}}
+@media (prefers-reduced-motion:reduce){.pf-item.pf-in{animation:none}.pf{transition:none}}
+@media (max-width:980px){.pf-item{display:flex;flex-direction:column;justify-content:flex-end;min-height:300px}.pf-label{position:relative;left:auto;right:auto;bottom:auto;margin:72px 20px 20px}}
+@media (max-width:600px){.pf-tabs{display:grid;grid-template-columns:1fr 1fr;width:100%}.pf-head{margin-top:44px}}
+.mr-nums{position:relative;grid-template-columns:repeat(3,1fr);margin-top:120px;border:0;isolation:isolate}
+.mr-nums::before{content:"";position:absolute;left:50%;top:0;width:min(900px,100%);height:340px;transform:translateX(-50%);z-index:-1;background:radial-gradient(50% 50% at 50% 50%,rgb(122 217 196/.16),transparent 70%)}
+.mr-nums div{padding:30px 20px;justify-items:center;text-align:center;border-top:1px solid #2a2a2e}
+.mr-nums div+div{border-left:0}
+.mr-nums div:nth-child(n+3){border-left:1px solid #2a2a2e}
+.mr-nums div:first-child{grid-column:1/-1;border-top:0;padding:0 0 46px;gap:10px}
+.mr-nums .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.24em;color:#7ad9c4}
+.mr-nums b{font-size:clamp(44px,6.4vw,84px);letter-spacing:-.01em;padding-bottom:.04em}
+.mr-nums div:first-child b{font-size:clamp(78px,15vw,200px);letter-spacing:-.03em;filter:drop-shadow(0 10px 40px rgb(122 217 196/.25));background:linear-gradient(100deg,#7ad9c4 0%,#b9d6a0 30%,#f2b45c 42%,#fff8e6 50%,#f2b45c 58%,#7ad9c4 100%);background-size:260% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent}
+.mr-nums div:first-child b.glint{animation:mrGlint 1.3s cubic-bezier(.4,0,.2,1)}
+@keyframes mrGlint{from{background-position:100% 0}to{background-position:0 0}}
+.mr-refl{--fs:clamp(78px,15vw,200px);all:unset;box-sizing:border-box;cursor:pointer;position:relative;display:grid;place-items:center;width:100%;height:calc(var(--fs) * .42);margin-top:calc(var(--fs) * -.2);overflow:hidden;-webkit-tap-highlight-color:transparent}
+.mr-refl i{font-style:normal;font-family:var(--f-num);font-weight:700;font-size:var(--fs);letter-spacing:-.03em;line-height:1;align-self:start;transform:scaleY(-1);background:linear-gradient(100deg,#7ad9c4,#f2b45c);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.2;-webkit-mask:linear-gradient(0deg,#000 10%,transparent 62%);mask:linear-gradient(0deg,#000 10%,transparent 62%);transition:opacity .6s,transform .8s cubic-bezier(.2,.8,.2,1),filter .6s}
+.mr-refl em{position:absolute;inset:0;display:grid;place-items:center;font-style:normal;font-family:var(--f-serif);font-weight:900;font-size:clamp(17px,2.4vw,28px);letter-spacing:.12em;color:#e8f6f1;opacity:0;transform:translateY(-30%) scaleY(-.4);transition:opacity .6s .15s,transform .8s .1s cubic-bezier(.2,.8,.2,1)}
+.mr-refl::after{content:"碰一下倒影";position:absolute;right:0;bottom:4px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.18em;color:#5f6b68;transition:opacity .4s}
+.mr-refl:hover i,.mr-refl.on i{opacity:0;transform:scaleY(-1) translateY(18%);filter:blur(6px)}
+.mr-refl:hover em,.mr-refl.on em{opacity:1;transform:none}
+.mr-refl:hover::after,.mr-refl.on::after{opacity:0}
+.mr-refl:focus-visible{outline:1px dashed #7ad9c4;outline-offset:4px}
+@media (prefers-reduced-motion:reduce){.mr-nums div:first-child b.glint{animation:none}}
+.mr-nums span{font-size:15px;letter-spacing:.06em;color:#b9b8b2}
+.mr-nums div:first-child>span:last-child{font-size:18px;color:#e6e4dd;display:grid;gap:6px;justify-items:center;margin-top:.55em}
+.mr-nums small{font-size:13px;letter-spacing:.04em;color:#8d8c87}
+@media (max-width:900px){.mr-refl{--fs:clamp(64px,19vw,140px)}.mr-refl::after{right:50%;transform:translateX(50%);bottom:0}.mr-nums{grid-template-columns:repeat(3,1fr);margin-top:90px}.mr-nums div{padding:22px 6px;border-left:0}.mr-nums div:nth-child(n+3){border-left:1px solid #2a2a2e}.mr-nums div:nth-child(n+2){border-top:1px solid #2a2a2e}.mr-nums b{font-size:clamp(30px,8.6vw,60px)}.mr-nums span{font-size:12.5px;letter-spacing:.02em}.mr-nums div:first-child{border-top:0;padding-bottom:34px}.mr-nums div:first-child b{font-size:clamp(64px,19vw,140px)}.mr-nums div:first-child>span:last-child{font-size:16px}}
+@media (max-width:900px),(pointer:coarse){
+  .hd.scroll{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--wall)}
+  .sheet{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgb(10 10 12/.7)}
+  .sheet-bar{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--wall)}
+  .hero .display .mirror{animation:none}
+  .portrait img{animation:none}
+  .fx-vid{clip-path:none}
+  .mr-marble{animation:none;filter:blur(18px) saturate(1.3);transform:scale(1.15)}
+  .mr-flip .dn{filter:none}
+  .mr-mq,.mr-mq .refl{-webkit-mask:none;mask:none}
+  .mr-mq .refl{opacity:.16}
+  .mr-nums div:first-child b{filter:none}
+  .sx .ch{filter:none}
+}
+.anim-off .track,.anim-off .mq-track{animation-play-state:paused}
+.cb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cb{position:relative;display:grid;align-content:start;gap:12px;padding:26px 24px 24px;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s}
+.cb::before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:var(--c);transform:scaleX(.18);transform-origin:left;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.cb:hover{transform:translateY(-4px);border-color:var(--c);box-shadow:0 24px 50px -30px var(--c)}
+.cb:hover::before{transform:none}
+.cb .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;color:var(--c)}
+.cb h3{font-family:var(--f-serif);font-weight:900;font-size:clamp(20px,2vw,24px);line-height:1.4}
+.cb ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.cb li{position:relative;padding-left:16px;font-size:14.5px;color:var(--muted);line-height:1.7}
+.cb li::before{content:"";position:absolute;left:0;top:.75em;width:6px;height:6px;border-radius:50%;background:var(--c)}
+.cb-case{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:6px;padding-top:14px;border-top:1px dashed var(--line)}
+.cb-case span{font-size:12px;color:var(--muted);margin-right:2px}
+.cb-case a{font-size:12.5px;padding:3px 10px;border-radius:99px;border:1px solid var(--c);color:var(--c);text-decoration:none;transition:background .2s,color .2s}
+.cb-case a:hover,.cb-case a:focus-visible{background:var(--c);color:#fff}
+.cb-note{font-size:12.5px;color:var(--muted)}
+.cb-flow{list-style:none;margin:26px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--card)}
+.cb-flow li{display:grid;gap:2px;padding:18px 20px;position:relative}
+.cb-flow li+li{border-left:1px solid var(--line)}
+.cb-flow li+li::before{content:"→";position:absolute;left:-9px;top:50%;transform:translateY(-50%);width:18px;height:18px;display:grid;place-items:center;font-size:11px;background:var(--wall);border:1px solid var(--line);border-radius:50%;color:var(--muted)}
+.cb-flow b{font-family:var(--f-num);font-size:13px;color:var(--accent)}
+.cb-flow span{font-weight:700;font-size:16px}
+.cb-flow small{font-size:12.5px;color:var(--muted)}
+.cb-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:26px;padding:22px 26px;border-radius:18px;background:var(--ink);color:var(--wall)}
+.cb-cta p{font-size:15px}
+.cb-mail{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:99px;background:var(--wall);color:var(--ink);font-weight:700;font-size:14.5px;text-decoration:none;transition:transform .25s}
+.cb-mail::after{content:"→";transition:transform .25s}
+.cb-mail:hover{transform:translateY(-2px)}.cb-mail:hover::after{transform:translateX(4px)}
+.cb-mail:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (max-width:900px){.cb-grid{grid-template-columns:1fr}.cb-flow{grid-template-columns:1fr 1fr}.cb-flow li:nth-child(3){border-left:0}.cb-flow li:nth-child(n+3){border-top:1px solid var(--line)}.cb-flow li:nth-child(3)::before{display:none}}
+@media (max-width:520px){.cb-flow{grid-template-columns:1fr}.cb-flow li+li{border-left:0;border-top:1px solid var(--line)}.cb-flow li+li::before{display:none}.cb-cta{padding:20px}}
+.fx-rev .fx-radio{grid-column:1/-1;border-color:#4a2c18;background:linear-gradient(120deg,rgb(231 166 74/.1),transparent 60%)}
+.fx-rev .fx-radio .no{color:#e7a64a;display:flex;align-items:center;gap:8px}
+.fx-radio .no i,.cb-radio i{width:8px;height:8px;border-radius:50%;background:#ff4b4b;box-shadow:0 0 0 0 rgb(255 75 75/.6);animation:onAir 1.8s infinite}
+@keyframes onAir{70%{box-shadow:0 0 0 8px rgb(255 75 75/0)}100%{box-shadow:0 0 0 0 rgb(255 75 75/0)}}
+.fx-rev .fx-radio p{color:#e7a64a}
+.room-head .cb-radio{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:10px;margin-top:6px;padding:7px 14px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:13.5px;text-decoration:none;transition:border-color .2s}
+.room-head .cb-radio:hover{border-color:var(--accent)}
+@media (prefers-reduced-motion:reduce){.fx-radio .no i,.cb-radio i{animation:none}}
+.oa-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.oa-col{position:relative;display:grid;align-content:start;gap:14px;padding:28px 28px 26px;border-radius:22px;background:#141417;color:#ece9e2;overflow:hidden;isolation:isolate}
+.oa-col::before{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;z-index:-1;background:radial-gradient(circle,rgb(231 166 74/.22),transparent 70%)}
+.oa-top{display:flex;align-items:center;gap:12px}
+.oa-ep{font-family:var(--f-num);font-weight:700;font-size:13px;letter-spacing:.12em;color:#e7a64a}
+.oa-live{margin-left:auto;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.2em;padding:3px 9px;border-radius:99px;border:1px solid #ff4b4b;color:#ff6b6b}
+.oa-eq{display:inline-flex;align-items:flex-end;gap:3px;height:16px}
+.oa-eq i{width:3px;height:100%;border-radius:2px;background:#e7a64a;transform-origin:bottom;transform:scaleY(.3)}
+.oa-col:not(.pre) .oa-eq i{animation:oaEq 1s ease-in-out infinite alternate}
+.oa-eq i:nth-child(2){animation-delay:-.4s!important}.oa-eq i:nth-child(3){animation-delay:-.7s!important}.oa-eq i:nth-child(4){animation-delay:-.2s!important}.oa-eq i:nth-child(5){animation-delay:-.55s!important}
+@keyframes oaEq{from{transform:scaleY(.25)}to{transform:scaleY(1)}}
+.oa-col h3{font-family:var(--f-serif);font-weight:900;font-size:clamp(21px,2.2vw,27px);line-height:1.45}
+.oa-lead{font-family:var(--f-serif);font-size:16.5px;line-height:1.8;color:#f3d7a8}
+.oa-lead::first-letter{font-size:2.1em;float:left;line-height:1;margin:.08em .12em 0 0;color:#e7a64a}
+.oa-col>p:not(.oa-lead){font-size:14.5px;line-height:1.95;color:#b5b2ab}
+.oa-act{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:6px;padding-top:16px;border-top:1px solid #2a2a2e}
+.oa-play{display:inline-flex;align-items:center;gap:10px;padding:9px 18px 9px 10px;border-radius:99px;background:#e7a64a;color:#141417;font-weight:700;font-size:14px;text-decoration:none;transition:transform .25s}
+.oa-play span{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#141417;color:#e7a64a;font-size:10px;padding-left:2px;box-sizing:border-box}
+.oa-play:hover{transform:translateY(-2px)}
+.oa-more{font-size:13.5px;color:#d8d5ce;text-decoration:none;border-bottom:1px solid transparent}
+.oa-more:hover{border-bottom-color:currentColor}
+.oa-play:focus-visible,.oa-more:focus-visible{outline:2px solid #e7a64a;outline-offset:3px}
+@media (max-width:860px){.oa-grid{grid-template-columns:1fr}.oa-col{padding:24px 20px}}
+@media (prefers-reduced-motion:reduce){.oa-col .oa-eq i{animation:none!important}}
+.pf-item.nolink .pf-go{display:none}
+.fx-oa{margin-top:16px;border:1px solid #26272b}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1203,7 +1464,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   <div class="wrap hd-in">
     <a class="logo" href="#entrance"><b>廖冠皓</b><small>PORTFOLIO</small></a>
     <nav class="nav" id="nav" aria-label="主選單">
-      <a href="#entrance">入口</a><a href="#latest">最新專案</a><a href="#career">經歷</a><a href="#works">作品</a><a href="#journey">沉浸之路</a><a href="#skills">能力</a><a href="#education">學歷</a><a href="#archive">典藏室</a>
+      <a href="#entrance">入口</a><a href="#latest">最新專案</a><a href="#career">經歷</a><a href="#works">作品</a><a href="#journey">沉浸之路</a><a href="#skills">能力</a><a href="#education">學歷</a><a href="#onair">電臺專欄</a><a href="#collab">合作</a>
     </nav>
     <a class="cta" href="#desk">服務台<svg><use href="#arr"/></svg></a>
     <button class="burger" id="burger" type="button" aria-label="開關選單" aria-expanded="false"><span class="hb"><i></i><i></i><i></i></span></button>
@@ -1219,7 +1480,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
     <li><a href="#journey">展間 03 · 沉浸之路<span>JOURNEY</span></a></li>
     <li><a href="#skills">展間 04 · 能力<span>SKILLS</span></a></li>
     <li><a href="#education">展間 05 · 學歷與社團<span>EDUCATION</span></a></li>
-    <li><a href="#archive">典藏室<span>ARCHIVE</span></a></li>
+    <li><a href="#onair">電臺專欄<span>ON AIR</span></a></li>
+    <li><a href="#collab">合作項目<span>COLLAB</span></a></li>
     <li><a href="#desk">服務台<span>CONTACT</span></a></li>
   </ul>
 </div>
@@ -1238,17 +1500,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
       <div class="exh">PORTFOLIO · 2018 — 2026</div>
       <h1 class="display"><span>廖冠皓</span><span class="en-name">Max Liao</span></h1>
       <p class="role">沉浸式創作 × 行銷企劃 × 科技互動</p>
-      <p class="intro">我是廖冠皓（Max Liao），畢業於<strong>淡江資傳</strong>（淡江大學資訊傳播學系），現在是<strong>政大傳播碩士學位學程</strong>的研究生，研究沉浸式體驗、密室逃脫與互動設計。平常做展覽和劇場的互動，也做行銷企劃。</p>
+      <p class="intro">我是廖冠皓（Max Liao），畢業於<strong>淡江資傳</strong>（淡江大學資訊傳播學系），現在是<strong>政大傳播碩士學位學程</strong>碩二的研究生，研究沉浸式體驗、密室逃脫與互動設計。平常做展覽和劇場的互動，也做行銷企劃。</p>
       <div class="doms">
-        <a class="dom d1" href="#mirror"><span class="no">01 · IMMERSIVE</span><b>沉浸式創作</b><span class="d">畢業展總召、密室主題、生死特展</span><em>10,000+ 觀展</em></a>
-        <a class="dom d2" href="#career"><span class="no">02 · MARKETING</span><b>行銷企劃</b><span class="d">遊戲上市、KOL 文案、社群經營</span><em>164K+ 觀看</em></a>
-        <div class="dom d3"><span class="no">03 · INTERACTIVE</span><b>科技互動</b><span class="d">劇場手機互動、照片管理系統</span><span class="dl"><a href="#latest">煙霧中長大的孩子</a><a href="#open-tl">台灣觀光協會 TravelLens</a></span></div>
-      </div>
-      <div class="quick">
-        <a href="https://reurl.cc/zDDXrk" target="_blank" rel="noopener">IMMERSE</a>
-        <a href="https://reurl.cc/Mjj5vm" target="_blank" rel="noopener">MARKET</a>
-        <a href="https://reurl.cc/933Nzx" target="_blank" rel="noopener">STUDY</a>
-        <a href="https://reurl.cc/rvvGqN" target="_blank" rel="noopener">CAST</a>
+        <a class="dom d1" href="#works-imm"><span class="no">01 · IMMERSIVE</span><b>沉浸式創作</b><span class="d">畢業展總召、密室主題、生死特展</span><em>10,000+ 觀展</em></a>
+        <a class="dom d2" href="#works-mkt"><span class="no">02 · MARKETING</span><b>行銷企劃</b><span class="d">遊戲上市、KOL 文案、社群經營</span><em>164K+ 觀看</em></a>
+        <div class="dom d3"><span class="no">03 · INTERACTIVE</span><b>科技互動</b><span class="d">劇場手機互動、照片管理系統</span><span class="dl"><a href="#works-tech">全部科技互動作品</a><a href="#latest">煙霧中長大的孩子</a><a href="#open-tl">台灣觀光協會 TravelLens</a></span></div>
       </div>
     </div>
     <div class="stage">
@@ -1447,11 +1703,18 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
 
   <div class="fx-end">
     <div class="wrap">
-      <span class="fx-k">REVIEWS · 藝穗駐節評論</span>
+      <span class="fx-k">REVIEWS &amp; ON AIR · 藝穗評論與電臺專訪</span>
       <div class="fx-rev" data-reveal="up">
         <a href="https://tpac.org.taipei/en/festival-fringe/2026/comment-writer/1713" target="_blank" rel="noopener"><span class="no">駐節觀察人 · 郭建甫</span><b>從觀眾到入境者，<br>一場戰火中的觀看體驗</b><p>認為手機不只是觀看的輔助工具，而是讓觀眾進入角色內心的入口。</p></a>
         <a href="https://tpac.org.taipei/en/festival-fringe/2026/comment-writer/1907" target="_blank" rel="noopener"><span class="no">駐節評論人 · 王遠博</span><b>以沉浸重看戰爭</b><p>細寫票券、手機網頁、密碼與拍照投影的互動流程，認為作品讓人重新拉近對戰爭的體感。</p></a>
       </div>
+      <article class="oa-col fx-oa" data-reveal="up">
+        <div class="oa-top"><span class="oa-ep">EP.01</span><span class="oa-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="oa-live">ON AIR</span></div>
+        <h3>舞台劇只能坐著看？<br>走進《煙霧中長大的孩子》的沉浸世界</h3>
+        <p class="oa-lead">這齣戲不讓觀眾只坐在台下。入場時，每個人拿到的是一張「入境」票，和一支手機。</p>
+        <p>《煙霧中長大的孩子》是 2026 臺北藝穗節的沉浸式劇場，拿下藝穗精選獎。故事同時從大人和孩子的角度看戰爭，觀眾用手機一步步經歷「入境規則」、「掩蓋的真相」、「現實的恐懼」，最後摺出「紙飛機的希望」。我負責科技互動設計與網頁程式，透過 AI 協作，把整套手機互動和即時投影寫出來。</p>
+        <div class="oa-act"><a class="oa-play" href="https://www.ner.gov.tw/Program/Episode/26110314223853821/" target="_blank" rel="noopener"><span aria-hidden="true">▶</span>收聽專訪</a><a class="oa-more" href="#onair">看全部電臺專欄 →</a></div>
+      </article>
     </div>
   </div>
   </div>
@@ -1715,6 +1978,107 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
       </article>
     </div>
   </div>
+  <div class="gy" id="guiyi">
+    <div class="gy-hero">
+      <video id="gyVideo" src="media/gy_open.mp4" poster="media/gy_poster.jpg" muted loop playsinline preload="none" aria-label="《詭憶屋》密室任務開場影片"></video>
+      <button class="gy-snd" id="gySnd" type="button" aria-pressed="false">開啟聲音</button>
+    </div>
+    <div class="wrap gy-body">
+      <span class="gy-k">魔方貝斯 4funBase · 企業接案 · 2022 — 24</span>
+      <h3>《詭憶屋》密室任務開場影片</h3>
+      <p class="gy-lead">「我是神秘美食組織的代言人，今天委託你們前來這裡⋯⋯」</p>
+      <p>在密室逃脫公司工讀的那幾年，我負責場域設計、帶場和謎題發想。這支是企業團體活動《詭憶屋》的開場影片：玩家一進場就看到它，從影片裡接下任務、聽懂規則。配音、剪輯和素材都是我自己做的。</p>
+      <div class="gy-rules">
+        <div class="gy-rh"><span>任務規則</span><button type="button" id="gyNext">拆開下一條</button></div>
+        <ol id="gyList">
+          <li>貼在牆上的線索謎團，都是詭憶屋的一部分，請各位<b>切勿移動</b>它們的位置。</li>
+          <li>外圍牆上的謎團，每解開一個可換 <b>1 個寶石</b>；率先找到美食秘笈的隊伍得 <b>3 個寶石</b>。</li>
+          <li>詭憶屋裡最多只能<b>容納 6 個人</b>，你們必須分配屋內、屋外人員，裡應外合。</li>
+          <li>每隔一段時間會進行一次<b>人力交換</b>：屋內出來幾個人，就能換幾個人進去。</li>
+        </ol>
+      </div>
+      <dl class="gy-dl">
+        <div><dt>角色</dt><dd>配音 · 剪輯 · 素材製作</dd></div>
+        <div><dt>工作</dt><dd>場域設計 · 帶場 · 謎題發想 · 行銷</dd></div>
+        <div><dt>巧思</dt><dd>屋內屋外分組、定時換人，讓整個團隊都得溝通合作</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="yt" id="yuanta">
+    <div class="wrap">
+      <span class="yt-k">課程專題 · 思考脈絡：創新採納與擴散 · 2026</span>
+      <h3>讓新手敢按下「買進」<small>元大證券「投資先生」App 服務創新專題</small></h3>
+      <p class="yt-lead">我們小組替元大證券的「投資先生」App 想了一套新手陪跑服務：從網路上的評價、投資人訪談開始，最後做出原型和 IP 吉祥物提案。</p>
+      <div class="yt-nums">
+        <div><b>123</b><span>則網路意見</span></div>
+        <div><b>9</b><span>位投資人訪談</span></div>
+        <div><b>13</b><span>項原型新功能</span></div>
+        <div><b>3</b><span>位 IP 候選角色</span></div>
+      </div>
+      <ol class="yt-flow">
+        <li><i>聽</i><b>網路輿情</b><span>PTT、Dcard、Threads、App 商店的 123 則意見：好評壞評幾乎各半，最常被抱怨的是手續費。</span></li>
+        <li><i>問</i><b>User Journey</b><span>訪談初階、中階、高階投資人。新手最大的斷點在下單頁：5 個人裡有 3 個卡在交易單位。</span></li>
+        <li><i>做</i><b>新手陪跑原型</b><span>13 項新功能都對回訪談或輿情：白話 ETF 比較、下單金額試算、「今天為什麼變了？」⋯⋯</span></li>
+        <li><i>說</i><b>IP 吉祥物</b><span>三位角色各自陪新手跨過一道障礙，再交給顧客票選。</span></li>
+      </ol>
+
+      <div class="yt-try">
+        <div class="yt-tx">
+          <span class="yt-k">試試看 · 原型裡的一個小功能</span>
+          <h4>「十股」下成「十張」？</h4>
+          <p>台股一張是 1,000 股。受訪的新手最怕的，就是把單位按錯、多付了一千倍的錢。原型在下單頁加上單位換算和金額試算，送出前先看清楚。</p>
+        </div>
+        <div class="yt-phone" role="group" aria-label="下單頁示意">
+          <div class="yt-ph-top">下單 · 示意 ETF<small>示意價格 NT$ 37.00</small></div>
+          <div class="yt-unit" id="ytUnit"><button type="button" data-u="1" class="on">股（零股）</button><button type="button" data-u="1000">張</button></div>
+          <div class="yt-qty"><button type="button" data-d="-1" aria-label="減少">−</button><output id="ytQty">10</output><button type="button" data-d="1" aria-label="增加">+</button></div>
+          <div class="yt-calc" id="ytCalc"></div>
+        </div>
+      </div>
+
+      <div class="yt-ip">
+        <span class="yt-k">IP 票選 · 造型尚未定案</span>
+        <h4>你最需要哪一種陪伴？</h4>
+        <div class="yt-cards" id="ytCards">
+          <button type="button" data-i="0" style="--c:#3b6fd8"><i>六</i><b>元小六 Lumi</b><small>六角恐龍 · 知識不足</small></button>
+          <button type="button" data-i="1" style="--c:#1f4fa8"><i>鵲</i><b>元小鵲 Skye</b><small>台灣藍鵲 · 決策與學習惰性</small></button>
+          <button type="button" data-i="2" style="--c:#2e7d8c"><i>甲</i><b>元小甲 Armo</b><small>台灣穿山甲 · 怕虧損</small></button>
+        </div>
+        <p class="yt-say" id="ytSay" aria-live="polite">選一位看看牠會怎麼陪你。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hk" id="hackathon">
+    <div class="wrap">
+      <span class="hk-k">創新提案 · 2026</span>
+      <h3>兩場黑客松</h3>
+      <p class="hk-lead">在很短的時間內，把一個陌生的問題研究清楚、變成一份能上台提案的方案。</p>
+
+      <article class="hk-item">
+        <div class="hk-head"><span class="hk-award">最佳人氣獎</span><span class="hk-k">2026 政大創意點子黑客松 · 晉級決賽</span></div>
+        <h4>黑水虻循環永續系統 BSF Eco-Cycle</h4>
+        <p>台灣每天產生約 2,115 公噸廚餘，其中超過六成拿去養豬；2027 年起全面禁止廚餘養豬後，這些廚餘需要新的出路。我們提出用黑水虻幼蟲分解廚餘，再轉成高蛋白飼料和有機肥料。我負責資料收集與研究分析：整理國內外產業案例、廚餘數據、政策和市場趨勢，讓團隊能快速建立論述。</p>
+        <div class="hk-calc">
+          <label for="hkRange">每天要處理多少廚餘？<b id="hkTon">2,115</b> 公噸</label>
+          <input type="range" id="hkRange" min="10" max="2115" step="5" value="2115">
+          <div class="hk-out"><span>約需黑水虻卵</span><b id="hkEgg">211.5</b><span>公斤／天</span></div>
+          <small>依業界常見估算：1 公斤黑水虻卵約可處理 10 公噸廚餘。</small>
+        </div>
+      </article>
+
+      <article class="hk-item">
+        <div class="hk-head"><span class="hk-k">2026 和泰 AI 黑客松 · 團隊「和事安泰」</span></div>
+        <h4>不搭車，也打開 yoxi</h4>
+        <p>題目是讓叫車 App yoxi 變成大家天天都會打開的服務。我們比較 Uber、台灣大車隊、LINE GO、Bolt 之後，決定不加入補貼戰，而是提出 AI 助理「Yoshi」：記住使用者的生活習慣，在需要的時候主動提醒。我負責 AI 應用的規劃，也透過 AI 協作做了一頁 Dcard 輿情分析網頁。</p>
+        <div class="hk-tabs" id="hkTabs" role="tablist" aria-label="三種使用情境">
+          <button type="button" role="tab" aria-selected="true" class="on">高峰通勤</button><button type="button" role="tab" aria-selected="false">家庭接送</button><button type="button" role="tab" aria-selected="false">城市出遊</button>
+        </div>
+        <div class="hk-case" id="hkCase" role="tabpanel"></div>
+      </article>
+    </div>
+  </div>
 </section>
 
 <!-- ============ ROOM 02 ============ -->
@@ -1741,6 +2105,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
     </div>
 
     <div class="wrap mr-body">
+      <div class="mr-flip" id="mrFlip" aria-label="鏡中映我，鏡外探你">
+        <span class="up" aria-hidden="true">鏡中映我</span>
+        <span class="dn" aria-hidden="true">鏡外探你</span>
+      </div>
       <div class="mr-intro" data-reveal="up">
         <p class="mr-lead">以鏡子隱喻媒介，也隱喻表裡的分界。<br>別人眼中的你，和你以為的自己，<br>是同一個人嗎？</p>
         <p class="mr-p">「鏡裡鏡外」探討現實與虛構之間的微妙關係。透過作品展示人們在不同情境中，自我認知與他人認知的矛盾，揭示公眾形象與真實個性之間的落差。</p>
@@ -1750,6 +2118,16 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
         <div class="side in"><span class="mr-k">INSIDE · 鏡內我</span><h4>向內看</h4><p>聚焦夢境、離別、人格發展與心理價值，反映個體對自身形象的探索與反思。</p></div>
         <div class="glass" aria-hidden="true"></div>
         <div class="side out"><span class="mr-k">OUTSIDE · 鏡外我</span><h4>向外走</h4><p>關注在地實踐、文化創生與社會議題，強調個體在社會中的角色與影響力。</p></div>
+      </div>
+
+      <div class="mr-lens-wrap" data-reveal="up">
+        <div class="mr-lens-h"><span class="mr-k">TWO SIDES · 拿起你的鏡子</span><h4>模糊的，是別人看見的你；<br>鏡子裡的，才是你自己。</h4><p>在畫面上移動（手機請點一下），用鏡子看清楚另一面。</p></div>
+        <div class="mr-lens" id="mrLens">
+          <img class="real" src="media/mr_kv.jpg" alt="《鏡裡鏡外》主視覺" loading="lazy">
+          <img class="seen" src="media/mr_kv.jpg" alt="" aria-hidden="true" loading="lazy">
+          <i class="ring" aria-hidden="true"><span>真實的你</span></i>
+          <span class="tag" aria-hidden="true">別人看見的你</span>
+        </div>
       </div>
 
       <div class="mr-play" data-reveal="up">
@@ -1772,11 +2150,17 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
         </div>
       </div>
 
+      <div class="mr-mq-h"><span class="mr-k">11 GROUPS · 一面鏡子，十一個角度</span><p>五組向內看自己，五組向外看社會，加上統籌整個展覽的畢籌組。</p></div>
+      <div class="mr-mq" aria-label="參展的 11 個組別">
+        <div class="row"><div class="track"><span class="g c"><em>畢籌</em>鏡裡鏡外</span><span class="g i"><em>鏡內</em>別人家的孩子</span><span class="g i"><em>鏡內</em>風向標</span><span class="g i"><em>鏡內</em>U Know What I 敏</span><span class="g i"><em>鏡內</em>How圖Use</span><span class="g i"><em>鏡內</em>離夢 Lemon’s Dream</span><span class="g o"><em>鏡外</em>REAL社</span><span class="g o"><em>鏡外</em>有迷有</span><span class="g o"><em>鏡外</em>心動不已：告白日記</span><span class="g o"><em>鏡外</em>護陣事務所</span><span class="g o"><em>鏡外</em>What 次 up</span><span class="g c"><em>畢籌</em>鏡裡鏡外</span><span class="g i"><em>鏡內</em>別人家的孩子</span><span class="g i"><em>鏡內</em>風向標</span><span class="g i"><em>鏡內</em>U Know What I 敏</span><span class="g i"><em>鏡內</em>How圖Use</span><span class="g i"><em>鏡內</em>離夢 Lemon’s Dream</span><span class="g o"><em>鏡外</em>REAL社</span><span class="g o"><em>鏡外</em>有迷有</span><span class="g o"><em>鏡外</em>心動不已：告白日記</span><span class="g o"><em>鏡外</em>護陣事務所</span><span class="g o"><em>鏡外</em>What 次 up</span></div></div>
+        <div class="row refl" aria-hidden="true"><div class="track"><span class="g c"><em>畢籌</em>鏡裡鏡外</span><span class="g i"><em>鏡內</em>別人家的孩子</span><span class="g i"><em>鏡內</em>風向標</span><span class="g i"><em>鏡內</em>U Know What I 敏</span><span class="g i"><em>鏡內</em>How圖Use</span><span class="g i"><em>鏡內</em>離夢 Lemon’s Dream</span><span class="g o"><em>鏡外</em>REAL社</span><span class="g o"><em>鏡外</em>有迷有</span><span class="g o"><em>鏡外</em>心動不已：告白日記</span><span class="g o"><em>鏡外</em>護陣事務所</span><span class="g o"><em>鏡外</em>What 次 up</span><span class="g c"><em>畢籌</em>鏡裡鏡外</span><span class="g i"><em>鏡內</em>別人家的孩子</span><span class="g i"><em>鏡內</em>風向標</span><span class="g i"><em>鏡內</em>U Know What I 敏</span><span class="g i"><em>鏡內</em>How圖Use</span><span class="g i"><em>鏡內</em>離夢 Lemon’s Dream</span><span class="g o"><em>鏡外</em>REAL社</span><span class="g o"><em>鏡外</em>有迷有</span><span class="g o"><em>鏡外</em>心動不已：告白日記</span><span class="g o"><em>鏡外</em>護陣事務所</span><span class="g o"><em>鏡外</em>What 次 up</span></div></div>
+      </div>
+
       <div class="mr-nums" data-reveal="up">
-        <div><b>10,000+</b><span>觀展人次</span></div>
-        <div><b>150</b><span>統籌的跨組成員</span></div>
-        <div><b>2</b><span>展區：淡江 · 華山</span></div>
-        <div><b>1,300</b><span>展覽 IG 追蹤</span></div>
+        <div><span class="k">BY THE NUMBERS · 鏡裡鏡外</span><b data-n="10000" data-s="+" id="mrBig">10,000+</b><button type="button" class="mr-refl" id="mrRefl" aria-label="翻開倒影"><i aria-hidden="true">10,000+</i><em>一萬個人，看見一萬種自己</em></button><span>觀展人次<small>淡江黑天鵝展示廳 × 華山文創園區 兩地展出</small></span></div>
+        <div><b data-n="150">150</b><span>統籌的跨組成員</span></div>
+        <div><b data-n="11">11</b><span>參展組別</span></div>
+        <div><b data-n="1300">1,300</b><span>展覽 IG 追蹤</span></div>
       </div>
 
       <dl class="mr-facts" data-reveal="up">
@@ -1806,6 +2190,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
     <div class="aap" id="hlAap"><button class="pp" id="hlPP" type="button" aria-label="暫停重點輪播">❚❚</button><div class="pill" id="hlDots" role="tablist" aria-label="切換重點"></div></div>
   </div>
   <div class="wrap">
+    <div class="pf-head" id="pfHead"><div class="pf-h"><span class="k">ALL WORKS · 依領域瀏覽</span><h3>作品分類</h3></div><div class="pf-tabs" id="pfTabs" role="group" aria-label="依領域篩選作品"></div></div>
+    <p class="pf-note" id="pfNote" aria-live="polite"></p>
     <div class="pf" id="pf"></div>
   </div>
 </section>
@@ -1885,8 +2271,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
     </div>
     <div class="edu">
       <div data-reveal="right">
-        <div class="school"><span class="y">2025/09 — 2027/06</span><div><h3>國立政治大學<span class="deg">碩士 · 就讀中</span></h3><p>傳播學院 傳播碩士學位學程</p><p class="rpt"><a href="https://www.facebook.com/tkuic/posts/1545405587385569/" target="_blank" rel="noopener">淡江資傳邀請回系分享：從沉浸體驗出發的研究所推甄經驗</a></p></div></div>
-        <div class="school"><span class="y">2021/09 — 2025/06</span><div><h3>淡江大學<span class="deg">學士</span></h3><p>資訊傳播學系 · GPA 4.0/4 · 第 24 屆畢業製作總召</p><p class="rpt"><a href="https://tkutimes.tku.edu.tw/dtl.aspx?no=59051" target="_blank" rel="noopener">淡江時報｜資傳系畢展「鏡裡鏡外」，以總召身分受訪</a><a href="https://tkutimes.tku.edu.tw/dtl.aspx?no=59347" target="_blank" rel="noopener">淡江時報｜資傳系第 24 屆畢業典禮，畢業生致詞</a></p></div></div>
+        <div class="school"><span class="y">2025/09 — 2027/06</span><div><h3>國立政治大學<span class="deg">碩士 · 碩二就讀中</span></h3><p>傳播學院 傳播碩士學位學程</p><p class="rpt"><a href="https://www.facebook.com/tkuic/posts/1545405587385569/" target="_blank" rel="noopener">淡江資傳邀請回系分享：從沉浸體驗出發的研究所推甄經驗</a></p></div></div>
+        <div class="school"><span class="y">2021/09 — 2025/06</span><div><h3>淡江大學<span class="deg">學士</span></h3><p>資訊傳播學系 · GPA 4.0/4 · 第 24 屆畢業製作總召</p><p class="rpt"><a href="https://tkutimes.tku.edu.tw/dtl.aspx?no=59051" target="_blank" rel="noopener">淡江時報｜資傳系畢展「鏡裡鏡外」，以總召身分受訪</a><a href="https://tkutimes.tku.edu.tw/dtl.aspx?no=59347" target="_blank" rel="noopener">淡江時報｜資傳系第 24 屆畢業典禮，畢業生致詞</a><a href="https://www.ner.gov.tw/Program/Episode/26092914515208257/" target="_blank" rel="noopener">國立教育廣播電臺｜淡江資傳系畢業 Max：從網站到沉浸式體驗</a></p></div></div>
         <div class="school"><span class="y">2018/08 — 2021/06</span><div><h3>國立新港藝術高中</h3><p>普通科畢業</p></div></div>
       </div>
       <div class="stack" data-reveal="left">
@@ -1899,14 +2285,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
           </ul></div>
         </div>
         <div>
-          <button class="col-toggle" type="button" data-col="press" aria-expanded="false"><span>媒體報導<small>6 MEDIA</small></span><svg><use href="#arr"/></svg></button>
+          <button class="col-toggle" type="button" data-col="press" aria-expanded="false"><span>媒體報導<small>5 MEDIA</small></span><svg><use href="#arr"/></svg></button>
           <div class="col-box" id="press"><ul class="col-list">
             <li style="--i:0"><a href="https://tpac.org.taipei/en/festival-fringe/2026/comment-writer/1713" target="_blank" rel="noopener"><span class="no">01</span><span class="tt">藝穗劇評｜從觀眾到入境者<small>郭建甫 · 評《煙霧中長大的孩子》</small></span><svg><use href="#arr"/></svg></a></li>
             <li style="--i:1"><a href="https://tpac.org.taipei/en/festival-fringe/2026/comment-writer/1907" target="_blank" rel="noopener"><span class="no">02</span><span class="tt">藝穗劇評｜以沉浸重看戰爭<small>王遠博 · 評《煙霧中長大的孩子》</small></span><svg><use href="#arr"/></svg></a></li>
             <li style="--i:2"><a href="https://reurl.cc/ZVV32W" target="_blank" rel="noopener"><span class="no">03</span><span class="tt">拉花冠軍專訪</span><svg><use href="#arr"/></svg></a></li>
             <li style="--i:3"><a href="https://reurl.cc/rvvGqN" target="_blank" rel="noopener"><span class="no">04</span><span class="tt">人生摩天輪 Podcast</span><svg><use href="#arr"/></svg></a></li>
-            <li style="--i:4"><a href="https://reurl.cc/E66lzA" target="_blank" rel="noopener"><span class="no">05</span><span class="tt">挺好 Campus</span><svg><use href="#arr"/></svg></a></li>
-            <li style="--i:5"><a href="https://reurl.cc/Gppyyd" target="_blank" rel="noopener"><span class="no">06</span><span class="tt">台北捷運特派員</span><svg><use href="#arr"/></svg></a></li>
+            <li style="--i:4"><a href="https://reurl.cc/Gppyyd" target="_blank" rel="noopener"><span class="no">05</span><span class="tt">台北捷運特派員</span><svg><use href="#arr"/></svg></a></li>
           </ul></div>
         </div>
       </div>
@@ -1914,31 +2299,69 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   </div>
 </section>
 
-<!-- ============ ARCHIVE ============ -->
-<section class="sec" id="archive" data-spy="典藏室">
+<!-- ============ ON AIR ============ -->
+<section class="sec oa" id="onair" data-spy="電臺專欄">
   <div class="wrap">
     <div class="room-head" data-reveal="right">
-      <span class="room-no">A</span>
-      <span class="lbl">Archive</span>
-      <h2>典藏室</h2>
-      <p>完整檔案存放在雲端，點擊即可開啟。</p>
+      <span class="room-no">R</span>
+      <span class="lbl">On Air · 國立教育廣播電臺</span>
+      <h2>電臺專欄</h2>
+      <p>兩次上電臺，聊的都是同一件事：怎麼讓人走進一個故事裡。</p>
     </div>
-    <div class="vault">
-      <article class="bp" data-reveal="up" style="--d:0ms">
-        <span class="k">ARCHIVE 01</span><h3>個人履歷</h3>
-        <p>學術成績（系排第一）、大傳社指導老師、政大創新育成中心記者等紀錄。</p>
-        <a class="sweep" href="https://drive.google.com/file/d/15IcjQk5PDA6m8m0fbQtJFwX-sICIRTf2/view?usp=sharing" target="_blank" rel="noopener">開啟履歷<svg><use href="#arr-r"/></svg></a>
+    <div class="oa-grid">
+      <article class="oa-col" data-reveal="up" style="--d:0ms">
+        <div class="oa-top"><span class="oa-ep">EP.01</span><span class="oa-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="oa-live">ON AIR</span></div>
+        <h3>舞台劇只能坐著看？<br>走進《煙霧中長大的孩子》的沉浸世界</h3>
+        <p class="oa-lead">這齣戲不讓觀眾只坐在台下。入場時，每個人拿到的是一張「入境」票，和一支手機。</p>
+        <p>《煙霧中長大的孩子》是 2026 臺北藝穗節的沉浸式劇場，拿下藝穗精選獎。故事同時從大人和孩子的角度看戰爭，觀眾用手機一步步經歷「入境規則」、「掩蓋的真相」、「現實的恐懼」，最後摺出「紙飛機的希望」。我負責科技互動設計與網頁程式，透過 AI 協作，把整套手機互動和即時投影寫出來。</p>
+        <div class="oa-act"><a class="oa-play" href="https://www.ner.gov.tw/Program/Episode/26110314223853821/" target="_blank" rel="noopener"><span aria-hidden="true">▶</span>收聽專訪</a><a class="oa-more" href="#latest">在網站裡體驗這齣戲 →</a></div>
       </article>
-      <article class="bp" data-reveal="up" style="--d:120ms">
-        <span class="k">ARCHIVE 02</span><h3>2025 個人作品集</h3>
-        <p>《劍與遠征》行銷成效、密室機關設計與 ThingLink 360VR 線上策展技術。</p>
-        <a class="sweep" href="https://drive.google.com/file/d/1yC5PVcNKDVVZoTXjQJo4acUMd4Zkah4J/view?usp=sharing" target="_blank" rel="noopener">開啟作品集<svg><use href="#arr-r"/></svg></a>
+      <article class="oa-col" data-reveal="up" style="--d:140ms">
+        <div class="oa-top"><span class="oa-ep">EP.02</span><span class="oa-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="oa-live">ON AIR</span></div>
+        <h3>從網站到沉浸式體驗<br>把腦中的點子變成看得見的作品</h3>
+        <p class="oa-lead">2018 年，我用 PowerPoint 做了第一個讓人投入的小遊戲。後來的每一件作品，其實都在做同一件事。</p>
+        <p>從高中的密室逃脫、淡江資傳的互動裝置，到帶 150 位同學辦《鏡裡鏡外》畢業展，再到用 AI 協作寫出劇場的手機互動和這個作品集網站。這集以「淡江資傳系畢業 Max」的身分，聊怎麼把腦中的點子，一步步變成別人看得見、走得進去的作品。</p>
+        <div class="oa-act"><a class="oa-play" href="https://www.ner.gov.tw/Program/Episode/26092914515208257/" target="_blank" rel="noopener"><span aria-hidden="true">▶</span>收聽專訪</a><a class="oa-more" href="#journey">看我的沉浸之路 →</a></div>
       </article>
-      <article class="bp" data-reveal="up" style="--d:240ms">
-        <span class="k">ARCHIVE 03</span><h3>104 個人檔案</h3>
-        <p>自傳、完整工作經歷、國科會計畫與求職條件。</p>
-        <a class="sweep" href="https://drive.google.com/file/d/1pkclgOm2c1fIwcxjYqh7t1mFd5Kkacvq/view?usp=sharing" target="_blank" rel="noopener">開啟 104 檔案<svg><use href="#arr-r"/></svg></a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ COLLABORATION ============ -->
+<section class="sec" id="collab" data-spy="合作">
+  <div class="wrap">
+    <div class="room-head" data-reveal="right">
+      <span class="room-no">C</span>
+      <span class="lbl">Collaboration</span>
+      <h2>合作項目</h2>
+      <p>有新的想法或需求，歡迎一起聊聊。</p>
+      <a class="cb-radio" href="#onair"><i aria-hidden="true"></i>電臺專訪｜從網站到沉浸式體驗，把腦中的點子變成看得見的作品 ↗</a>
+    </div>
+    <div class="cb-grid">
+      <article class="cb" data-reveal="up" style="--c:#2a3fc9;--d:0ms">
+        <span class="k">01 · IMMERSIVE</span>
+        <h3>沉浸式體驗與展覽企劃</h3>
+        <ul><li>實境解謎、密室主題與遊戲流程設計</li><li>展覽策展、場域規劃與動線</li><li>劇場、展演的互動環節設計</li></ul>
+        <div class="cb-case"><span>案例</span><a href="#mirror">鏡裡鏡外</a><a href="#open-gy">詭憶屋</a><a href="#open-bj">此疆彼界</a></div>
       </article>
+      <article class="cb" data-reveal="up" style="--c:#c47a12;--d:120ms">
+        <span class="k">02 · MARKETING</span>
+        <h3>社群內容與行銷企劃</h3>
+        <ul><li>社群貼文企劃、文案與視覺方向</li><li>上市活動、KOL 合作與記者會</li><li>提案企劃、競品與網路輿情分析</li></ul>
+        <div class="cb-case"><span>案例</span><a href="#open-yd">YDRALIS</a><a href="#open-yt">投資先生</a><a href="#works-mkt">全部行銷作品</a></div>
+      </article>
+      <article class="cb" data-reveal="up" style="--c:#d9531e;--d:240ms">
+        <span class="k">03 · INTERACTIVE</span>
+        <h3>互動網頁與作品集網站</h3>
+        <ul><li>個人作品集、展覽與活動網站</li><li>觀眾用手機參與的互動體驗</li><li>團隊內部的小工具與管理系統</li></ul>
+        <div class="cb-case"><span>案例</span><a href="#latest">煙霧中長大的孩子</a><a href="#open-tl">TravelLens</a><a href="#career">履歷資料</a></div>
+        <p class="cb-note">透過 AI 協作開發。</p>
+      </article>
+    </div>
+    <div class="cb-cta" data-reveal="up">
+      <p>不管是展覽、活動、品牌，還是一個還沒成形的點子，都可以寫信來聊聊。</p>
+      <a class="cb-mail" href="mailto:q2329201@gmail.com?subject=%E6%83%B3%E8%B7%9F%E4%BD%A0%E8%81%8A%E8%81%8A">寫信聊聊</a>
     </div>
   </div>
 </section>
@@ -1971,7 +2394,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
 <div class="pop" id="pop" data-type="0" role="dialog" aria-label="快速聯絡">
   <h3>快速聯絡</h3>
   <div class="row"><small>E-MAIL</small><span class="m">q2329201@gmail.com</span></div>
-  <div class="row"><small>目前</small><span>政大傳播碩士班 · 政大創新育成中心 記者</span></div>
+  <div class="row"><small>目前</small><span>政大傳播碩士班 碩二 · 政大創新育成中心 記者</span></div>
   <div class="acts">
     <button class="copy" type="button" data-copy="q2329201@gmail.com">複製 Email</button>
     <a href="https://drive.google.com/file/d/1yC5PVcNKDVVZoTXjQJo4acUMd4Zkah4J/view?usp=sharing" target="_blank" rel="noopener">作品集</a>
@@ -2039,28 +2462,80 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   fac.appendChild(fl); fl.children[0].click();
 
   /* ---------- ROOM 02: works ---------- */
+  const CATS = {
+    imm: { z:'沉浸式創作', e:'IMMERSIVE', c:'#2a3fc9', d:'讓觀眾走進去的作品：劇場、展覽、實境遊戲。' },
+    mkt: { z:'行銷企劃', e:'MARKETING', c:'#c47a12', d:'把作品說給更多人聽：上市行銷、社群經營、內容企劃。' },
+    tech: { z:'科技互動', e:'INTERACTIVE', c:'#d9531e', d:'透過 AI 協作，把想法做成能操作的系統與互動。' }
+  };
   const works = [
-    { no:'No.01 · 2025', t:'《鏡裡鏡外》資傳系畢業展', meta:'總召 · 策展人 · 行銷｜華山文創園區 · 淡江黑天鵝展示廳', href:'#mirror', kpi:'10,000+ 人次', g:'鏡',
+    { no:'2026', t:'《煙霧中長大的孩子》沉浸式劇場', meta:'科技互動設計 · 網頁程式設計｜臺北藝穗節', href:'#fringeWork', kpi:'藝穗精選獎', g:'煙', cat:['imm','tech'],
+      d:'讓觀眾拿起手機「入境」戰爭：透過 AI 協作，寫出整套手機互動與即時投影。', c:['#1a0806','#b4431a','#120605'] },
+    { no:'2025', t:'《鏡裡鏡外》資傳系畢業展', meta:'總召 · 策展人 · 行銷｜華山文創園區 · 淡江黑天鵝展示廳', href:'#mirror', kpi:'10,000+ 人次', g:'鏡', cat:['imm','mkt'],
       d:'以鏡子為隱喻，分為「鏡中我」與「鏡外我」兩大展區。帶領 150 名成員，統籌展覽規劃、跨組協作、行政與場地協調；IG 累積 1,300 追蹤，並與企業異業合作。', c:['#2a3140','#a7b4c8','#151a24'] },
-    { no:'No.02 · 2024', t:'《劍與遠征：啟程》上市行銷', meta:'市場行銷企劃實習生｜奧瑞吉', kpi:'164K+ 觀看', g:'遠',
-      d:'Slogan「單手玩成大世界」、KOL 文案、廣告創意與記者會活動設計；商店排行 Top 1，並產出《絕區零》競品分析。', c:['#3d1606','#e07a2c','#2a0b14'] },
-    { no:'No.03 · 2024', t:'〈感官數位Z世代〉策展實驗', meta:'國科會大專生研究｜研究創作獎', kpi:'NSTC', g:'感', href:'#open-ns',
-      d:'研究數位敘事在互動展覽中的沉浸效果，於新港藝高、淡江大學聯合展演。', c:['#14213f','#5a72e0','#0d1226'] },
-    { no:'No.04 · 2025', t:'《十二花神 · AI 詩畫境》', meta:'Gen-AI 線上展｜Recraft · Gemini · ThingLink', kpi:'360° VR', g:'花', href:'#open-hs',
+    { no:'2026', t:'TravelLens 旅遊視覺資產管理系統', meta:'台灣觀光協會｜AI 協作開發', href:'#open-tl', kpi:'內部系統', g:'旅', cat:['tech'],
+      d:'幫協會整理大量旅遊照片：AI 匯入、標籤篩選、權限分級，讓同事找圖不再翻資料夾。', c:['#0d2a3a','#3aa0c8','#0a1622'] },
+    { no:'2026', t:'元大證券「投資先生」新手陪跑', meta:'課程專題｜思考脈絡：創新採納與擴散', href:'#open-yt', kpi:'123 則輿情', g:'投', cat:['mkt','tech'],
+      d:'從網路輿情、9 位投資人訪談，做出 13 項功能的新手陪跑原型，再提出三位 IP 吉祥物給顧客票選。', c:['#0e1f45','#3b6fd8','#0a1430'] },
+    { no:'2026', t:'兩場黑客松：黑水虻循環 × yoxi AI 助理', meta:'政大創意點子黑客松 · 和泰 AI 黑客松', href:'#open-hk', kpi:'最佳人氣獎', g:'創', cat:['mkt','tech'],
+      d:'用黑水虻處理廚餘的循環提案拿下最佳人氣獎；另一場替叫車 App 設計主動提醒的 AI 生活管家。', c:['#16301a','#5aa04f','#0d1d10'] },
+    { no:'2025 — 26', t:'YDRALIS 社群內容', meta:'聯合大數據 · 社群行銷實習生', href:'#open-yd', kpi:'社群經營', g:'社', cat:['mkt'],
+      d:'香氛品牌社群的貼文企劃、視覺與文案，從產品故事到節慶檔期。', c:['#2b2116','#c9a46a','#15100b'] },
+    { no:'2025', t:'《十二花神 · AI 詩畫境》', meta:'Gen-AI 線上展｜Recraft · Gemini · ThingLink', href:'#open-hs', kpi:'360° VR', g:'花', cat:['imm','tech'],
       d:'Recraft 生成古典山水，Gemini 多模態語義解析，人機協作創作古詩《石上桃華》，再以 ThingLink 設計互動熱點，打造 360 度環景沈浸空間。', c:['#3a1428','#d96a96','#1b2140'] },
-    { no:'No.05 · 2022', t:'Podcast《人生摩天輪》', meta:'共同創作 · 節目企劃與錄製', kpi:'3,492 下載', g:'聲',
-      d:'結合傳播理論與市場需求，探討現代人的內心議題；不重複下載 1,059 次。', c:['#0f2e26','#38b58a','#0b1a24'], href:'https://reurl.cc/rvvGqN' },
-    { no:'No.06 · 2023', t:'〈此疆彼界〉生死特展', meta:'新港藝高大傳社 指導老師', kpi:'沉浸實境', g:'界', href:'#open-bj',
+    { no:'2024', t:'《劍與遠征：啟程》上市行銷', meta:'市場行銷企劃實習生｜奧瑞吉', kpi:'164K+ 觀看', g:'遠', cat:['mkt'], nolink:true,
+      d:'Slogan「單手玩成大世界」、KOL 文案、廣告創意與記者會活動設計；商店排行 Top 1，並產出《絕區零》競品分析。', c:['#3d1606','#e07a2c','#2a0b14'] },
+    { no:'2024', t:'〈感官數位Z世代〉策展實驗', meta:'國科會大專生研究｜研究創作獎', href:'#open-ns', kpi:'NSTC', g:'感', cat:['imm','tech'],
+      d:'研究數位敘事在互動展覽中的沉浸效果，於新港藝高、淡江大學聯合展演。', c:['#14213f','#5a72e0','#0d1226'] },
+    { no:'2024', t:'挺好 Campus 社群商務競賽「集食廣益」', meta:'專案企劃｜長輩圖 · Podcast · 解謎企劃', kpi:'公益行銷獎', g:'益', cat:['mkt'], nolink:true,
+      d:'三週推出三檔活動，替食物銀行募得 9,661 元，讓弱勢家庭在母親節吃到一塊蛋糕；在 42 組中拿下公益行銷獎第二名與公益成果獎佳作。', c:['#3a1a10','#e0794a','#1e0d08'] },
+    { no:'2024', t:'「無名旅地」旅遊專案企劃', meta:'城鄉旅遊・綠色饗宴 全國競賽', kpi:'初賽優選', g:'旅', cat:['mkt'], href:'https://reurl.cc/YqqN6O',
+      d:'從嘉義市美術館、獄政博物館到東石漁村和檜意生活村，把被遺忘的角落串成一條永續旅遊路線。', c:['#2c2410','#c9a24a','#171207'] },
+    { no:'2022 — 24', t:'《詭憶屋》密室任務開場影片', meta:'魔方貝斯 4funBase · 企業接案', href:'#open-gy', kpi:'影片 2 分鐘', g:'詭', cat:['imm'],
+      d:'團體密室活動的開場任務影片：玩家從影片接下委託、聽懂規則。配音、剪輯、素材都自己做。', c:['#0d1430','#4a64c8','#07091a'] },
+    { no:'2023', t:'〈此疆彼界〉生死特展', meta:'新港藝高大傳社 指導老師', href:'#open-bj', kpi:'沉浸實境', g:'界', cat:['imm'],
       d:'與學生探討生死議題，共同策劃「跨越生死的聲歷其境」沉浸式互動藝術特展。', c:['#2b1240','#9b5fd6','#120a1c'] },
+    { no:'2022', t:'Podcast《人生摩天輪》', meta:'共同創作 · 節目企劃與錄製', kpi:'3,492 下載', g:'聲', cat:['mkt'],
+      d:'結合傳播理論與市場需求，探討現代人的內心議題；不重複下載 1,059 次。', c:['#0f2e26','#38b58a','#0b1a24'], href:'https://reurl.cc/rvvGqN' },
   ];
-  const pf = $('#pf');
-  works.forEach((w, i) => {
-    const a = document.createElement('a'); a.className = 'pf-item'; a.href = w.href || PORTFOLIO; if (a.getAttribute('href')[0] !== '#') { a.target = '_blank'; a.rel = 'noopener'; }
-    a.dataset.reveal = 'zoom-out-up'; a.style.setProperty('--d', (i % 3) * 120 + 'ms');
-    a.innerHTML = `<div class="pf-img" style="background:radial-gradient(70% 70% at ${28 + i * 10}% 30%, ${w.c[1]}88, transparent 65%), linear-gradient(140deg, ${w.c[0]}, ${w.c[2]})"><span class="glyph">${w.g}</span></div>
+  const pf = $('#pf'), pfTabs = $('#pfTabs'), pfNote = $('#pfNote');
+  const card = (w, i, first) => {
+    const a = document.createElement(w.nolink ? 'div' : 'a'); a.className = 'pf-item' + (w.nolink ? ' nolink' : ''); if (!w.nolink) { a.href = w.href || PORTFOLIO; if (a.getAttribute('href')[0] !== '#') { a.target = '_blank'; a.rel = 'noopener'; } }
+    if (first) { a.dataset.reveal = 'zoom-out-up'; a.style.setProperty('--d', (i % 3) * 120 + 'ms'); } else { a.classList.add('pf-in'); a.style.setProperty('--d', i * 60 + 'ms'); }
+    a.innerHTML = `<div class="pf-img" style="background:radial-gradient(70% 70% at ${28 + (i % 6) * 10}% 30%, ${w.c[1]}88, transparent 65%), linear-gradient(140deg, ${w.c[0]}, ${w.c[2]})"><span class="glyph">${w.g}</span></div>
       <span class="pf-kpi">${w.kpi}</span><span class="pf-go">${ARR}</span>
-      <div class="pf-label"><span class="pf-no">${w.no}</span><span class="pf-title">${w.t}</span><span class="pf-meta">${w.meta}</span><span class="pf-desc">${w.d}</span></div>`;
-    pf.appendChild(a);
+      <div class="pf-label"><span class="pf-cats">${w.cat.map(k => `<i style="--c:${CATS[k].c}">${CATS[k].z}</i>`).join('')}</span><span class="pf-no">${w.no}</span><span class="pf-title">${w.t}</span><span class="pf-meta">${w.meta}</span><span class="pf-desc">${w.d}</span></div>`;
+    return a;
+  };
+  /* bento: first card is big; the last row is stretched so the grid never has holes */
+  const layout = items => {
+    const n = items.length;
+    items.forEach((a, i) => { a.classList.toggle('big', i === 0 && n > 2); a.classList.remove('w2', 'w3', 't2'); });
+    if (n > 2) { const k = (n - 3) % 3; if (k === 1) items[n - 1].classList.add('w3'); if (k === 2) items[n - 1].classList.add('w2'); }
+    if ((n - 1) % 2 === 1) items[n - 1].classList.add('t2');
+  };
+  let cur = 'all';
+  const show = (key, first) => {
+    cur = key;
+    const list = works.filter(w => key === 'all' || w.cat.includes(key));
+    pf.replaceChildren(...list.map((w, i) => card(w, i, first)));
+    layout([...pf.children]);
+    pfTabs.querySelectorAll('button').forEach(b => { const on = b.dataset.k === key; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); });
+    pfNote.textContent = key === 'all' ? `三個領域，${works.length} 件作品；同一件作品可能橫跨不同領域。` : CATS[key].d;
+    pfNote.style.setProperty('--c', key === 'all' ? 'var(--ink)' : CATS[key].c);
+  };
+  pfTabs.innerHTML = [['all', '全部', 'ALL', 'var(--ink)'], ...Object.entries(CATS).map(([k, v]) => [k, v.z, v.e, v.c])].map(([k, z, e, c]) =>
+    `<button type="button" data-k="${k}" style="--c:${c}"><small>${e}</small>${z}<span>${works.filter(w => k === 'all' || w.cat.includes(k)).length}</span></button>`).join('');
+  pfTabs.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || b.dataset.k === cur) return;
+    pf.classList.add('out');
+    setTimeout(() => { show(b.dataset.k); pf.classList.remove('out'); }, reduce ? 0 : 220);
+  });
+  show('all', true);
+  /* other parts of the page can open a category: <a href="#works-imm"> */
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#works-"]'); if (!a) return;
+    const k = a.getAttribute('href').slice(7); if (!CATS[k]) return;
+    e.preventDefault(); show(k); $('#pfHead').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   });
 
   /* ---------- ROOM 03: journey ---------- */
@@ -2218,7 +2693,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   const lines = [
     ['[作品集]', '廖冠皓 Max Liao', ''],
     ['[策展人]', '廖冠皓 GUAN-HAO LIAO', ''],
-    ['[現居]', '政大傳播學位學程 · 碩一', ''],
+    ['[現居]', '政大傳播學位學程 · 碩二', ''],
     ['[展間]', '經歷 · 作品 · 沉浸之路 · 能力', 'OPEN'],
     ['[典藏]', '履歷 · 作品集 · 104 檔案', 'READY'],
   ];
@@ -2315,12 +2790,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
     if (heroIn) { if (!userPaused) tryPlay(); } else vid.pause();
   }, { threshold: 0.12 }).observe(hero);
 
+  const LITE = matchMedia('(max-width:900px), (pointer:coarse)').matches;
   const dual = $('#fxDual'), dpairs = $$('.fx-dp'), dcnt = $('#fxDcnt'), dhint = $('#fxDhint');
   let dcur = -1;
   const frame = () => {
     const H = innerHeight, r = hero.getBoundingClientRect();
     const p = clamp(-r.top / Math.max(1, r.height - H));
-    if (!reduce) {
+    if (!reduce && !LITE) {
       stick.style.setProperty('--ins-y', (p * 9).toFixed(2) + 'vh');
       stick.style.setProperty('--ins-x', (p * 7).toFixed(2) + 'vw');
       stick.style.setProperty('--rad', (p * 32).toFixed(1) + 'px');
@@ -2634,6 +3110,51 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   });
   render();
 })();
+
+(() => {
+  const root = document.getElementById('mirror'); if (!root) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  /* 鏡外探你 flips up out of the reflection as you scroll */
+  const flip = document.getElementById('mrFlip');
+  const onScroll = () => { if (!flip) return; const r = flip.getBoundingClientRect(), H = innerHeight; flip.style.setProperty('--p', reduce ? 1 : clamp((H * 0.9 - r.top) / (H * 0.55)).toFixed(3)); };
+  let tk = false; addEventListener('scroll', () => { if (!tk) { tk = true; requestAnimationFrame(() => { onScroll(); tk = false; }); } }, { passive: true }); onScroll();
+
+  /* the lens: blurred is how others see you, the mirror shows you */
+  const lens = document.getElementById('mrLens');
+  const LITE = matchMedia('(max-width:900px), (pointer:coarse)').matches;
+  if (lens) {
+    let tx = null, ty = null, x = 0, y = 0, last = 0, on = false, raf = 0;
+    const set = (px, py) => { lens.style.setProperty('--mx', px.toFixed(1) + 'px'); lens.style.setProperty('--my', py.toFixed(1) + 'px'); };
+    const loop = t => {
+      raf = 0; if (!on) return;
+      const w = lens.clientWidth, h = lens.clientHeight;
+      let gx, gy;
+      const idle = tx === null || t - last > 2600;
+      if (idle && LITE) { gx = tx === null ? w / 2 : tx; gy = ty === null ? h / 2 : ty; }
+      else if (idle) { gx = w * (0.5 + Math.sin(t / 1700) * 0.32); gy = h * (0.5 + Math.cos(t / 1300) * 0.28); }
+      else { gx = tx; gy = ty; }
+      x += (gx - x) * 0.14; y += (gy - y) * 0.14; set(x, y);
+      if (LITE && Math.abs(gx - x) < 0.5 && Math.abs(gy - y) < 0.5) return;
+      if (!reduce) raf = requestAnimationFrame(loop);
+    };
+    const go = () => { if (!raf && on) raf = requestAnimationFrame(loop); };
+    const move = e => { const r = lens.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; last = performance.now(); go(); };
+    lens.addEventListener('pointermove', move); lens.addEventListener('pointerdown', move);
+    new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on) { if (!x) { x = lens.clientWidth / 2; y = lens.clientHeight / 2; } go(); } }, { threshold: 0.1 }).observe(lens);
+  }
+
+  /* numbers count up once */
+  const nio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; nio.unobserve(e.target);
+    const b = e.target, n = +b.dataset.n, s = b.dataset.s || '';
+    if (reduce) { b.textContent = n.toLocaleString('en-US') + s; return; }
+    const t0 = performance.now(), dur = 1400;
+    const step = t => { const k = clamp((t - t0) / dur), v = Math.round(n * (1 - Math.pow(1 - k, 3))); b.textContent = v.toLocaleString('en-US') + (k === 1 ? s : ''); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }), { threshold: 0.6 });
+  root.querySelectorAll('.mr-nums b[data-n]').forEach(b => nio.observe(b));
+})();
 </script>
 <script>
 (() => {
@@ -2879,12 +3400,83 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
 </script>
 <script>
 (() => {
+  const $ = id => document.getElementById(id);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* 詭憶屋: film plays while the sheet is open, rules unseal one by one */
+  const gy = $('guiyi');
+  if (gy) {
+    const v = $('gyVideo'), snd = $('gySnd');
+    const play = () => { const p = v.play(); if (p) p.catch(() => {}); };
+    snd.addEventListener('click', () => { v.muted = !v.muted; if (v.paused) play(); snd.textContent = v.muted ? '開啟聲音' : '靜音'; snd.setAttribute('aria-pressed', String(!v.muted)); });
+    new IntersectionObserver(([e]) => { if (e.isIntersecting && !reduce) play(); else v.pause(); }, { threshold: 0.3 }).observe(v);
+    const lis = [...$('gyList').children], next = $('gyNext');
+    let shown = 1;
+    const sync = () => { lis.forEach((li, i) => li.classList.toggle('hid', i >= shown)); next.disabled = false; next.textContent = shown >= lis.length ? '重新封存' : '拆開下一條'; };
+    next.addEventListener('click', () => { shown = shown >= lis.length ? 1 : shown + 1; sync(); });
+    gy.addEventListener('sheetclose', () => { shown = 1; sync(); v.muted = true; snd.textContent = '開啟聲音'; snd.setAttribute('aria-pressed', 'false'); });
+    sync();
+  }
+
+  /* 元大: unit converter + IP picker */
+  if ($('yuanta')) {
+    const PRICE = 37, unitBox = $('ytUnit'), qtyEl = $('ytQty'), calc = $('ytCalc');
+    let unit = 1, qty = 10;
+    const fmt = n => n.toLocaleString('en-US');
+    const render = () => {
+      qtyEl.textContent = qty;
+      const shares = qty * unit, cost = shares * PRICE;
+      calc.classList.toggle('warn', unit === 1000);
+      calc.innerHTML = `<b>NT$ ${fmt(cost)}</b>你要買 ${fmt(qty)} ${unit === 1 ? '股' : '張'}，也就是 ${fmt(shares)} 股` + (unit === 1000 ? `<br>⚠ 這是「張」：比 ${fmt(qty)} 股多 1,000 倍，確定嗎？` : '<br>✓ 零股下單，金額先算給你看');
+    };
+    unitBox.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; unit = +b.dataset.u; unitBox.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); render(); });
+    document.querySelector('.yt-qty').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; qty = Math.min(999, Math.max(1, qty + +b.dataset.d)); render(); });
+    render();
+    const IP = [
+      ['元小六 Lumi', '「不懂沒關係，隨時重新學。」', '六角恐龍有再生能力，象徵不怕從頭來過。負責 AI 聊天機器人和學習地圖，頭上的鰓做成發光的電路線條。'],
+      ['元小鵲 Skye', '「今天的任務只要 3 分鐘：看懂一檔 ETF 在買什麼！」', '藍鵲是台灣特有種，羽毛剛好是元大藍。牠會推你一把但不給壓力，負責新手任務、交易提醒和 ETF 介紹。'],
+      ['元小甲 Armo', '「先模擬、再下單，把風險看清楚。」', '穿山甲遇到危險會捲成球保護自己，對應風險管理。負責模擬交易、風險評估和交易筆記。']
+    ];
+    const cards = $('ytCards'), say = $('ytSay');
+    cards.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      cards.querySelectorAll('button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', String(x === b)); });
+      const [n, q, d] = IP[+b.dataset.i];
+      say.innerHTML = `<b>${n}</b>：${q}<br>${d}`;
+    });
+  }
+
+  /* 黑客松: food-waste calculator + yoxi scenarios */
+  if ($('hackathon')) {
+    const r = $('hkRange'), ton = $('hkTon'), egg = $('hkEgg');
+    const upd = () => { const t = +r.value; ton.textContent = t.toLocaleString('en-US'); egg.textContent = (t / 10).toLocaleString('en-US', { maximumFractionDigits: 1 }); };
+    r.addEventListener('input', upd); upd();
+    const CASES = [
+      ['知道會塞車，但常常要出門才處理', '依通勤習慣，在出門前先提醒、再引導叫車，也預告停車位'],
+      ['每天要記時間、叫車，還要確認孩子或長輩有沒有平安抵達', 'AI 自動排程、優先派熟識司機，有異常才傳摘要通知'],
+      ['不知道今天附近有什麼好去處，也懶得查', '依生活圈、活動和交通，主動推薦小而有用的在地情報與行程']
+    ];
+    const tabs = [...$('hkTabs').children], box = $('hkCase');
+    const show = i => {
+      tabs.forEach((t, k) => { t.classList.toggle('on', k === i); t.setAttribute('aria-selected', String(k === i)); });
+      box.innerHTML = `<div><small>使用者的困擾</small><p>${CASES[i][0]}</p></div><i aria-hidden="true">→</i><div><small>Yoshi 怎麼做</small><p>${CASES[i][1]}</p></div>`;
+    };
+    tabs.forEach((t, i) => t.addEventListener('click', () => show(i)));
+    show(0);
+  }
+})();
+</script>
+<script>
+(() => {
   const SHEETS = {
     tl: { el: document.getElementById('travellens'), label: '台灣觀光協會 · TravelLens 旅遊視覺資產管理系統', match: '台灣觀光協會' },
     yd: { el: document.getElementById('ydralis'), label: '聯合大數據 · YDRALIS 社群作品', match: '聯合大數據', dark: true },
     hs: { el: document.getElementById('hanashin'), label: 'Gen-AI 線上展 · 十二花神 · 花間鏡像', dark: true },
     ns: { el: document.getElementById('nstc'), label: '國科會大專生研究 · 感官數位 Z 世代', match: '國科會', dark: true },
-    bj: { el: document.getElementById('bianjie'), label: '沉浸式體驗遊戲 · 此疆彼界 · 意·憶', match: '新港藝高' }
+    bj: { el: document.getElementById('bianjie'), label: '沉浸式體驗遊戲 · 此疆彼界 · 意·憶', match: '新港藝高' },
+    gy: { el: document.getElementById('guiyi'), label: '魔方貝斯 · 《詭憶屋》密室任務開場影片', match: '魔方貝斯', dark: true },
+    yt: { el: document.getElementById('yuanta'), label: '課程專題 · 元大證券「投資先生」服務創新' },
+    hk: { el: document.getElementById('hackathon'), label: '創新提案 · 2026 兩場黑客松' }
   };
   const html = document.documentElement;
   let openKey = null, lastFocus = null, hideT = 0;
@@ -2972,6 +3564,24 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   "knowsAbout": ["沉浸式體驗", "密室逃脫", "互動設計", "策展", "行銷企劃", "AI 協作開發"],
   "sameAs": ["https://github.com/maxa911017", "https://maxa911017.github.io/Guan-Hao-Liao_resume/"]
 }
+</script>
+<script>
+(() => {
+  const io = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('anim-off', !e.isIntersecting)), { rootMargin: '100px 0px' });
+  document.querySelectorAll('.mr-mq, #mq').forEach(el => { el.classList.add('anim-off'); io.observe(el); });
+  /* 10,000+: the reflection follows the count, a glint sweeps across when it lands, tap the reflection to read it */
+  const big = document.getElementById('mrBig'), refl = document.getElementById('mrRefl');
+  if (big && refl) {
+    const ri = refl.querySelector('i');
+    let done = false;
+    new MutationObserver(() => {
+      ri.textContent = big.textContent;
+      if (!done && big.textContent.endsWith('+')) { done = true; big.classList.add('glint'); setTimeout(() => refl.classList.add('on'), 900); setTimeout(() => refl.classList.remove('on'), 3600); }
+    }).observe(big, { childList: true, characterData: true, subtree: true });
+    big.addEventListener('animationend', () => big.classList.remove('glint'));
+    refl.addEventListener('click', () => { refl.classList.toggle('on'); big.classList.remove('glint'); void big.offsetWidth; big.classList.add('glint'); });
+  }
+})();
 </script>
 
 </body></html>
